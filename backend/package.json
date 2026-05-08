@@ -1,0 +1,16 @@
+{
+  "dependencies": {
+    "@prisma/client": "^5.22.0",
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "prisma": "^5.22.0"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "tsx": "^4.21.0"
+  },
+  "scripts": {
+    "dev": "tsx ./src/server.ts"
+  }
+}

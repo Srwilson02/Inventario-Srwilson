@@ -1,0 +1,108 @@
+import { useEffect, useState } from 'react';
+import { api } from './api';
+
+
+interface Products {
+  id: number;
+  name: string;
+  group: string;
+  price: number;
+  quantity: number;
+}
+
+function App() {
+  const [products, setProducts] = useState<Products[]>([]);
+  useEffect(() => {
+    api.get('/products') .then((response) => {
+        setProducts(response.data);
+      });
+  }, []);
+
+  return (
+    <div>
+      {products.map((product) => (
+        <div key={product.id}>
+          <h2>{product.name}</h2>
+          <p>Grupo: {product.group}</p>
+          <p>Preço: R$ {product.price.toFixed(2)}</p>
+          <p>Quantidade: {product.quantity}</p>
+        </div>
+      ))}
+    </div>
+  );
+}
+//  const addItem = (): void => {
+//     const newProduct: Products = {
+//       id: Date.now(),
+//       name: `produto ${products.length + 1}`,
+//       group: "Geral",
+//       price: 0,
+//       quantity: 1,
+//     };
+//     setProducts([...products, newProduct]);
+//   };
+//   return (
+//     <div className="min-h-screen bg-gray-50 p-8 font-sans">
+//       <div className="max-w-4xl mx-auto">
+//         <div className="flex justify-between items-center mb-8">
+//           <h1 className="text-3xl font-extrabold text-gray-900">
+//             Inventário do SrWilson
+//           </h1>
+//         </div>
+//         <div className="bg-white shadow-sm border border-gray-200 rounded-lg overflow-hidden">
+//           <table className="min-w-full divide-y divide-gray-200">
+//             <thead className="bg-gray-100">
+//               <tr>
+//                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+//                   Produto
+//                 </th>
+//                 {
+//                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+//                     Grupo
+//                   </th>
+//                 }
+//                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+//                   Preço
+//                 </th>
+//                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+//                   Quantidade
+//                 </th>
+//               </tr> 
+//             </thead>
+//           <button className="px-4 py-2 bg-blue-600 text-white px-5 py-2 rounded-md hover:bg-blue-700 transition font-semibold">
+//             Adicionar Item
+//           </button>
+//             <tbody className="bg-white divide-y divide-gray-200">
+//               {products.map((p) => (
+//                 <tr key={p.id} className="hover:bg-gray-100">
+//                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+//                     {p.name}
+//                   </td>
+//                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+//                     R$ {p.price.toFixed(2)}
+//                   </td>
+//                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+//                     {p.group}
+//                   </td>
+//                   <td className="px-6 py-4 text-center">
+//                     <span className="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs font-semibold">
+//                       {p.quantity} unidades
+//                     </span>
+//                   </td>
+//                   <td className="px-6 py-4 text-sm text-gray-500">
+//                     {new Intl.NumberFormat("pt-BR", {
+//                       style: "currency",
+//                       currency: "BRL",
+//                     }).format(p.price)}
+//                   </td>
+//                 </tr>
+//               ))}
+//             </tbody>
+//           </table>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
+export default App;

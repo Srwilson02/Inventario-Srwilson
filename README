@@ -1,0 +1,137 @@
+1. Pré-requisitos do Sistema (Instalações Globais)
+
+Node.js: Versão recomendada 18+ (para executar JavaScript/TypeScript no backend e frontend). Baixe e instale do site oficial (nodejs.org).
+
+npm: Gerenciador de pacotes do Node.js (vem incluído na instalação do Node.js). Versão 8+.
+
+PostgreSQL: Banco de dados relacional usado pelo Prisma. Instale uma instância local (via PostgreSQL.org ou Docker) e crie um banco de dados para o projeto.
+
+Git: Para versionamento (opcional, mas útil para clonar repositórios).
+
+
+2. Dependências do Backend (Instaladas via npm)
+
+Execute npm install na pasta backend para instalar tudo automaticamente.
+
+Dependências principais (runtime):
+
+@prisma/client: Cliente Prisma para interagir com o banco de dados.
+
+cors: Middleware para permitir requisições cross-origin.
+
+express: Framework web para o servidor.
+
+prisma: CLI e ferramentas do Prisma.
+
+Dependências de desenvolvimento (dev):
+
+@types/cors: Tipos TypeScript para CORS.
+
+@types/express: Tipos TypeScript para Express.
+
+tsx: Executor TypeScript para desenvolvimento (usado no script dev).
+
+
+3. Dependências do Frontend (Instaladas via npm)
+
+Execute npm install na pasta frontend para instalar tudo automaticamente.
+
+Dependências principais (runtime):
+
+@tailwindcss/postcss: Integração do Tailwind CSS com PostCSS.
+
+axios: Biblioteca para fazer requisições HTTP (para comunicar com o backend).
+
+react: Biblioteca React para a interface.
+
+react-dom: Renderização do React no DOM.
+
+Dependências de desenvolvimento (dev):
+
+@eslint/js: Configuração ESLint para linting.
+
+@types/node: Tipos TypeScript para Node.js.
+
+@types/react e @types/react-dom: Tipos TypeScript para React.
+
+@vitejs/plugin-react: Plugin Vite para React.
+
+autoprefixer: Ferramenta para adicionar prefixos CSS automaticamente.
+
+eslint: Linter para JavaScript/TypeScript.
+
+eslint-plugin-react-hooks e eslint-plugin-react-refresh: Plugins ESLint para React.
+
+globals: Definições globais para ESLint.
+
+postcss: Processador CSS.
+
+tailwindcss: Framework CSS para estilização.
+
+typescript: Compilador TypeScript.
+
+typescript-eslint: Integração TypeScript com ESLint.
+
+vite: Ferramenta de build e servidor de desenvolvimento.
+
+
+4. Configurações e Ferramentas Adicionais
+
+Prisma:
+
+Instale globalmente (opcional): npm install -g prisma para usar comandos CLI em qualquer lugar.
+
+Gere o cliente Prisma: Execute npx prisma generate (na raiz ou backend) para criar o cliente baseado no schema.
+
+Execute migrações: npx prisma migrate dev (para aplicar mudanças no banco durante desenvolvimento) ou npx prisma db push (para sincronizar o schema sem migrações).
+
+O schema está em schema.prisma e define o modelo Product com campos como id, name, quantity, etc.
+
+Variáveis de Ambiente:
+
+Crie um arquivo .env na raiz do projeto com DATABASE_URL="postgresql://usuario:senha@localhost:5432/nome_do_banco" (ajuste para sua configuração PostgreSQL).
+
+Tailwind CSS: Já incluído nas dependências; configure via tailwind.config.js e postcss.config.js (já presentes).
+
+
+5. Comandos para Executar o Projeto
+
+Backend:
+
+Navegue para backend: cd backend
+
+Instale dependências: npm install
+
+Execute o servidor: npm run dev (usa tsx para rodar src/server.ts).
+
+Frontend:
+
+Navegue para frontend: cd frontend
+
+Instale dependências: npm install
+
+Execute o app: npm run dev (usa Vite para servir em localhost:5173, por exemplo).
+
+Build para produção: npm run build
+
+Lint: npm run lint
+
+Prisma (se necessário):
+
+Gere cliente: npx prisma generate
+
+Migre banco: npx prisma migrate dev
+
+Visualize banco: npx prisma studio (opcional, abre uma interface web).
+
+Observações Gerais
+
+Ordem Recomendada: Instale Node.js/npm primeiro, depois PostgreSQL. Em seguida, instale dependências em backend e frontend. Configure o .env com a URL do banco, gere o Prisma client e execute migrações antes de rodar os servidores.
+
+Possíveis Problemas: Se o banco não conectar, verifique a URL no .env. Para conflitos de portas, ajuste no código (backend provavelmente roda na 3000, frontend na 5173).
+
+Teste: Após tudo instalado, rode npm run dev em ambas as pastas e acesse o frontend no navegador. O backend deve expor APIs para produtos (baseado em src/server.ts).
+
+Se algo não funcionar, verifique logs de erro ou use npm ls para confirmar pacotes instalados.
+
+Se precisar de mais detalhes sobre algum componente ou ajuda para executar algo específico, me avise!
