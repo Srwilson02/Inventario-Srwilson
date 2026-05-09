@@ -66,7 +66,7 @@ function App() {
     loadProducts();
   }, []);
 
-  async function handleCleanInventory() {
+  async function CleanInventory() {
     const confirm = window.confirm(
       "Tem certeza que deseja limpar o inventário? Esta ação não pode ser desfeita.",
     );
@@ -84,16 +84,32 @@ function App() {
     }
   }
 
+  const handleDelete = async (id: number) => {
+    const confirm = window.confirm(
+      "Tem certeza que deseja deletar este item do inventario? Esta ação não pode ser desfeita.",
+    );
+    if (confirm) {
+      try {
+        await api.delete(`/products/${id}`);
+        setProducts((prev) => prev.filter((item) => item.id !== id));
+        alert("Produto deletado com sucesso!");
+      } catch (error) {
+        console.error("Erro ao deletar produto: ", error);
+        alert("Erro ao tentar excluir item do inventário.");
+      }
+    }
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center p-4 bg-gray-100">
       <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
         <h1 className="text-2xl font-bold text-gray-800 mb-6 text-center">
-          Inventario Do <span className="text-blue-600">SrWilson</span>
+          Inventario Do <span className="text-orange-600">SrWilson</span>
         </h1>
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <div className="flex flex-col gap-1">
-            <label className="text-sm font-semibold text-gray-600">
+            <label className="text-sm font-semibold text-blue-600">
               Nome do Produto
             </label>
             <input
@@ -107,7 +123,7 @@ function App() {
           </div>
 
           <div className="flex flex-col gap-1">
-            <label className="text-sm font-semibold text-gray-600">Grupo</label>
+            <label className="text-sm font-semibold text-blue-600">Grupo</label>
             <input
               type="text"
               ref={grupoRef}
@@ -119,7 +135,7 @@ function App() {
           </div>
 
           <div className="flex flex-col gap-1">
-            <label className="text-sm font-semibold text-gray-600">Preço</label>
+            <label className="text-sm font-semibold text-blue-600">Preço</label>
             <input
               type="number"
               step="0.1"
@@ -132,7 +148,7 @@ function App() {
           </div>
 
           <div className="flex flex-col gap-1">
-            <label className="text-sm font-semibold text-gray-600">
+            <label className="text-sm font-semibold text-blue-600">
               Quantidade
             </label>
             <input
@@ -147,27 +163,21 @@ function App() {
 
           <button
             type="submit"
-            className="mt-4 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md transition-colors shadow-sm"
+            className="mt-4 bg-orange-600 hover:bg-orange-700 text-black font-bold py-2 px-4 rounded-md transition-colors shadow-sm"
           >
             Cadastrar
           </button>
         </form>
       </div>
-      <div className="mt-8 bg-white p-6 rounded-lg shadow-md w-full-4xl">
+      <div className="mt-8 bg-darkblue p-6 rounded-lg shadow-md w-full-4xl">
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl font-bold text-gray-800">
+          <h2 className=" bg-orange-400 text-gray-800bg-orange-400 hover:bg-orange-500 text-black px-4 py-2 rounded-md transition-colors text-sm font-medium">
             Produtos Cadastrados
           </h2>
-          <button
-            onClick={loadProducts}
-            className="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-md transition-colors text-sm font-medium"
-          >
-            Carregar Produtos
-          </button>
 
           <button
-            onClick={handleCleanInventory}
-            className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4
+            onClick={CleanInventory}
+            className="bg-red-500 hover:bg-red-600 text-black font-bold py-2 px-4
           rounded-md transition-colors shadow-sm"
           >
             Limpar Inventario
@@ -197,6 +207,14 @@ function App() {
                   </td>
                   <td className="py-2 px-4 border border-gray-300">
                     {product.quantity}
+                  </td>
+                  <td className="py-2 px-4 border border-gray-300">
+                    <button
+                      onClick={() => handleDelete(product.id)}
+                      className="bg-black hover:bg-gray-700 text-black py-1 px-3 rounded-md transition-colors"
+                    >
+                      🗑️
+                    </button>
                   </td>
                 </tr>
               ))}

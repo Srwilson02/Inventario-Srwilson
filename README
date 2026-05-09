@@ -1,3 +1,28 @@
+ Sistema de Gerenciamento de Inventário
+
+Este é um projeto Full-Stack desenvolvido para facilitar o controle de estoque de produtos. O sistema permite listar, adicionar, editar e remover itens, garantindo que o banco de dados e a interface estejam sempre sincronizados.
+
+ Tecnologias Utilizadas
+
+O projeto foi construído utilizando as seguintes tecnologias:
+
+- **Frontend:** [React.js] com [Vite]
+- **Backend:** [Node.js] com  [Express]
+- **Banco de Dados:** [PostgreSQL]
+- **ORM:** [Prisma]
+- **Comunicação API:** [Axios]
+
+Funcionalidades
+
+- **Listagem de Produtos:** Visualização em tempo real dos itens cadastrados.
+- **Cadastro de Itens:** Adição de novos produtos ao inventário.
+- **Remoção Individual:** Exclusão de itens específicos.
+- **Limpeza de Inventário:** Opção para deletar todos os registros de uma vez com confirmação de segurança.
+- **Integração Completa:** Comunicação fluida entre o banco de dados PostgreSQL e o Frontend.
+
+
+[intruções de como rodar o projeto, instalar dependências, etc...]
+
 1. Pré-requisitos do Sistema (Instalações Globais)
 
 Node.js: Versão recomendada 18+ (para executar JavaScript/TypeScript no backend e frontend). Baixe e instale do site oficial (nodejs.org).
@@ -135,3 +160,4 @@ Teste: Após tudo instalado, rode npm run dev em ambas as pastas e acesse o fron
 Se algo não funcionar, verifique logs de erro ou use npm ls para confirmar pacotes instalados.
 
 Se precisar de mais detalhes sobre algum componente ou ajuda para executar algo específico, me avise!
+

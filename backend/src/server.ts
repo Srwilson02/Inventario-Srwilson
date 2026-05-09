@@ -1,6 +1,7 @@
 import express, { Request, Response } from "express";
 import cors from "cors";
 import { PrismaClient } from "@prisma/client";
+// import pool from "pg";
 
 const prisma = new PrismaClient();
 const app = express();
@@ -20,7 +21,7 @@ app.get("/products", async (req: Request, res: Response) => {
 });
 
 // rota para criar um novo produto
-// const {name, grupo, preco, quantity} = req.body;
+
 app.post("/products", async (req: Request, res: Response) => {
   const { name, grupo, preco, quantity } = req.body;
   try {
@@ -69,6 +70,22 @@ return reply.status(200).send({ message: "Produtos deletados com sucesso!" });
   return reply.status(500).send({ error: "Erro ao deletar produtos" });
 }
 });
+
+export const deleteProduct = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  try {
+    const checkProduct = await prisma.product.delete({
+      where: { id: Number(id) },
+    });
+    return res.status(200).json({ message: "Item excluído com sucesso!" });
+  } catch (error) {
+    console.error("Erro ao deletar produto:", error);
+    return res.status(500).json({ message: "erro ao tentar excluir item" });
+  }
+};
+
+app.delete("/products/:id", deleteProduct);
+
 
 const PORT = 3001;
 app.listen(PORT, () => {
